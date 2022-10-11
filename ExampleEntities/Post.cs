@@ -2,7 +2,7 @@
 
 namespace ExampleEntities;
 
-[Buildable]
+[GenerateEntityBuilder]
 public class Post
 {
     public int PostId { get; set; }

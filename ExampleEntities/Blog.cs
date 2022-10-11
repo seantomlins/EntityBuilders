@@ -2,7 +2,7 @@
 
 namespace ExampleEntities;
 
-[Buildable]
+[GenerateEntityBuilder]
 public class Blog
 {
     public int BlogId { get; set; }

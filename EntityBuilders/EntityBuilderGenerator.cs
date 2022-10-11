@@ -1,50 +1,38 @@
 ﻿using System.Collections.Immutable;
-using System.Text;
-using EntityBuilders.Annotation;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
 
 namespace EntityBuilders;
 
 [Generator]
-public class EntityBuilderGenerator : IIncrementalGenerator
+public class EntityBuilderGenerator : ISourceGenerator
 {
-    public void Initialize(IncrementalGeneratorInitializationContext context)
+    public void Initialize(GeneratorInitializationContext context)
     {
-        var classWithAttributesProvider = context.SyntaxProvider
-            .CreateSyntaxProvider(IsClassWithAttributes, Transform)
-            .Where(m => m is not null);
-
-        context.RegisterSourceOutput(context.CompilationProvider.Combine(classWithAttributesProvider.Collect()),
-            GenerateSource);
     }
 
-    private static bool IsClassWithAttributes(SyntaxNode node, CancellationToken _)
+    public void Execute(GeneratorExecutionContext context)
     {
-        return node is ClassDeclarationSyntax { AttributeLists.Count: > 0 };
+        foreach (var syntaxTree in context.Compilation.SyntaxTrees)
+        foreach (var classDeclarationSyntax in syntaxTree
+                     .GetRoot()
+                     .DescendantNodes()
+                     .OfType<ClassDeclarationSyntax>()
+                     .Where(x => x.AttributeLists.Any())
+                     .ToImmutableList())
+        {
+            foreach (var attribute in classDeclarationSyntax.AttributeLists.SelectMany(x => x.Attributes))
+            {
+                if (attribute.Name.ToString() == "GenerateEntityBuilder")
+                {
+                    GenerateBuilder(context, classDeclarationSyntax);
+                }
+            }
+        }
     }
 
-    private static ClassDeclarationSyntax? Transform(GeneratorSyntaxContext context, CancellationToken _)
+    private static void GenerateBuilder(GeneratorExecutionContext context, ClassDeclarationSyntax classDeclarationSyntax)
     {
-        // var classDeclarationSyntax = (ClassDeclarationSyntax)context.Node;
-
-        throw new Exception("Found!");
-        // foreach (var attributeSyntax in classDeclarationSyntax.AttributeLists.SelectMany(x => x.Attributes))
-        // {
-        //     if (attributeSyntax.GetType() == typeof(BuildableAttribute))
-        //     {
-        //         return classDeclarationSyntax;
-        //     }
-        // }
-        //
-        // return null;
-    }
-
-    private static void GenerateSource(SourceProductionContext sourceProductionContext,
-        (Compilation Left, ImmutableArray<ClassDeclarationSyntax?> Right) source)
-    {
-        // TODO Generate from source
-        sourceProductionContext.AddSource("OhHi.g.cs", SourceText.From(string.Empty, Encoding.UTF8));
+        // TODO Generate Source Code
     }
 }
