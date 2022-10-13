@@ -60,12 +60,12 @@ namespace EntityBuilders
             _entity = new {className}();
         }}
 
-{string.Join(string.Empty, methods)}
-
         public {className} Build()
         {{
             return _entity;
         }}
+
+{string.Join(string.Empty, methods)}
     }}
 }}
 ", Encoding.UTF8);
