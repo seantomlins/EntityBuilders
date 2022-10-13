@@ -2,5 +2,10 @@
 
 using EntityBuilders;
 
-var blogBuilder = new BlogBuilder().Build();
-var postBuilder = new PostBuilder().Build();
+var blogBuilder = new BlogBuilder()
+    .BlogId(123)
+    .Url("http://localhost")
+    .Build();
+
+var postBuilder = new PostBuilder()
+    .Build();
