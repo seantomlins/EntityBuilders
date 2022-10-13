@@ -8,10 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\EntityBuilders.Annotation\EntityBuilders.Annotation.csproj"/>
-        <ProjectReference Include="..\EntityBuilders\EntityBuilders.csproj"
-                          OutputItemType="Analyzer"
-                          ReferenceOutputAssembly="false"/>
+        <ProjectReference Include="..\EntityBuilders.Annotation\EntityBuilders.Annotation.csproj" />
+        <ProjectReference Include="..\EntityBuilders\EntityBuilders.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 </Project>
