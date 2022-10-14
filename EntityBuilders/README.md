@@ -8,15 +8,19 @@
 
 ### Guides and Tutorials
 
-https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview
+[Official Docs](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview)
 
-https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md
+[Cookbook](https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md)
 
-https://www.youtube.com/watch?v=IUMZH5Z4r00
+[EF Conventions](https://www.entityframeworktutorial.net/efcore/conventions-in-ef-core.aspx)
 
 ### TODO
 
+* [ ] Id naming convention for construction
 * [ ] Self-to-one properties
 * [ ] Self-to-many properties
 * [ ] Protected and private setters for properties
 * [ ] Refactoring to a SyntaxReceiver
+* [ ] Non-integer Ids 
+* [ ] Key annotation
+* [ ] Respecting EntityTypeConfiguration
