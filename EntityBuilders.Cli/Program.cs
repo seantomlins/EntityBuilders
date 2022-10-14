@@ -2,10 +2,11 @@
 
 using EntityBuilders;
 
-var blogBuilder = new BlogBuilder()
-    .BlogId(123)
+var idProvider = new SequentialProvider();
+
+var blogBuilder = new BlogBuilder(idProvider)
     .Url("http://localhost")
     .Build();
 
-var postBuilder = new PostBuilder()
+var postBuilder = new PostBuilder(idProvider)
     .Build();
