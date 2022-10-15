@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace EntityBuilders;
 
@@ -8,8 +7,8 @@ internal class Entity
     public string Name { get; }
     public string IdPropertyName { get; }
     public string Namespace { get; }
-    
-    public IEnumerable<PropertyDeclarationSyntax> Properties { get; }
+
+    public IEnumerable<Property> Properties { get; }
 
     public Entity(ClassDeclarationSyntax classDeclarationSyntax)
     {
@@ -19,6 +18,20 @@ internal class Entity
 
         Properties = classDeclarationSyntax.Members
             .OfType<PropertyDeclarationSyntax>()
-            .ToImmutableArray();
+            .Select(x => new Property(x, this));
+    }
+}
+
+internal class Property
+{
+    public string Name { get; }
+    public string PropertyType { get; }
+    public Entity Entity { get; }
+
+    public Property(PropertyDeclarationSyntax propertyDeclarationSyntax, Entity entity)
+    {
+        Entity = entity;
+        Name = propertyDeclarationSyntax.Identifier.ToString();
+        PropertyType = propertyDeclarationSyntax.Type.ToString();
     }
 }
