@@ -5,7 +5,7 @@ namespace ExampleEntities;
 [GenerateEntityBuilder]
 public class Post
 {
-    public int PostId { get; set; }
+    public int Id { get; set; } // Primary Key convention type A
     public string Title { get; set; }
     public string Content { get; set; }
 

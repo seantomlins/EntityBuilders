@@ -6,7 +6,7 @@ namespace ExampleEntities.EntityBuilderTests;
 public class BlogBuilderTests
 {
    [Fact]
-   public void Should_BuildABlog()
+   public void Build_Should_ReturnBuiltBlog()
    {
       // Given
       var builder = new BlogBuilder(new SequentialProvider());
