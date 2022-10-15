@@ -17,4 +17,6 @@ public class BlogBuilderTests
       // Then
       Assert.Equal(1, blog.BlogId);
    }
+   
+   // TODO AddPost_Should_AddPostToBlog_And_SetBlogOnPost
 }
