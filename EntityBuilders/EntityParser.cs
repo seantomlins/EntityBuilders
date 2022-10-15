@@ -16,9 +16,10 @@ internal class EntityParser
                      .OfType<ClassDeclarationSyntax>()
                      .Where(x => x.AttributeLists.Any())
                      .ToImmutableList())
-        foreach (var attribute in classDeclarationSyntax.AttributeLists.SelectMany(x => x.Attributes))
         {
-            if (attribute.Name.ToString() == "GenerateEntityBuilder")
+            if (classDeclarationSyntax.AttributeLists
+                .SelectMany(x => x.Attributes)
+                .Any(x => x.Name.ToString() == "GenerateEntityBuilder"))
             {
                 entities.Add(new Entity(classDeclarationSyntax));
             }
