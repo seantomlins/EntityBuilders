@@ -1,4 +1,6 @@
-﻿namespace EntityBuilders;
+﻿using EntityBuilders.Config;
+
+namespace EntityBuilders.Templates;
 
 internal static class IdProvidersTemplate
 {

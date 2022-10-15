@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 
-namespace EntityBuilders;
+namespace EntityBuilders.Config;
 
 internal class EntityBuilderConfig
 {

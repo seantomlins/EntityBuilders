@@ -1,4 +1,7 @@
-﻿namespace EntityBuilders;
+﻿using EntityBuilders.Config;
+using EntityBuilders.Models;
+
+namespace EntityBuilders.Templates;
 
 internal static class EntityBuilderTemplate
 {

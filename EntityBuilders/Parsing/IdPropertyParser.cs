@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace EntityBuilders;
+namespace EntityBuilders.Parsing;
 
 internal static class IdPropertyParser
 {

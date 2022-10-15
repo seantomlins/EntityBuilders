@@ -1,4 +1,8 @@
 ﻿using System.Text;
+using EntityBuilders.Config;
+using EntityBuilders.Models;
+using EntityBuilders.Parsing;
+using EntityBuilders.Templates;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 

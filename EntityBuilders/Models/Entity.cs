@@ -1,6 +1,7 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using EntityBuilders.Parsing;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace EntityBuilders;
+namespace EntityBuilders.Models;
 
 internal class Entity
 {
@@ -19,19 +20,5 @@ internal class Entity
         Properties = classDeclarationSyntax.Members
             .OfType<PropertyDeclarationSyntax>()
             .Select(x => new Property(x, this));
-    }
-}
-
-internal class Property
-{
-    public string Name { get; }
-    public string PropertyType { get; }
-    public Entity Entity { get; }
-
-    public Property(PropertyDeclarationSyntax propertyDeclarationSyntax, Entity entity)
-    {
-        Entity = entity;
-        Name = propertyDeclarationSyntax.Identifier.ToString();
-        PropertyType = propertyDeclarationSyntax.Type.ToString();
     }
 }

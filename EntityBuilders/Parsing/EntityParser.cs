@@ -1,8 +1,9 @@
 ﻿using System.Collections.Immutable;
+using EntityBuilders.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace EntityBuilders;
+namespace EntityBuilders.Parsing;
 
 internal static class EntityParser
 {
