@@ -17,11 +17,14 @@
 ### TODO
 
 * [X] Id naming convention for construction
+* [X] Configurable namespace
 * [ ] Self-to-one properties
 * [ ] Self-to-many properties
 * [ ] Protected and private setters for properties
-* [X] Configurable namespace
+
+### Future
+
 * [ ] Refactoring to a SyntaxReceiver
-* [ ] Non-integer Ids 
+* [ ] Non-integer Ids
 * [ ] Key annotation
 * [ ] Respecting EntityTypeConfiguration

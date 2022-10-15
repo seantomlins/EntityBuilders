@@ -110,6 +110,4 @@ namespace {config.RootNamespace}
 "));
         return propertyMethods;
     }
-
-    // determine the namespace the class/enum/struct is declared in, if any
 }
