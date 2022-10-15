@@ -2,7 +2,7 @@
 
 internal static class EntityBuilderTemplate
 {
-    public static string CreateFrom(Entity entity, EntityBuilderConfig config)
+    public static string GenerateSource(Entity entity, EntityBuilderConfig config)
     {
         var propertyMethods = string.Join(string.Empty, entity.Properties.Select(property => $@"
         public {property.Entity.Name}Builder {property.Name}({property.PropertyType} value){{

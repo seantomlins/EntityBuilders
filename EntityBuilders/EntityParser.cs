@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace EntityBuilders;
 
-internal class EntityParser
+internal static class EntityParser
 {
     public static IEnumerable<Entity> GetEntities(GeneratorExecutionContext context)
     {

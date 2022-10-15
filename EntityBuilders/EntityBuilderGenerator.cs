@@ -15,21 +15,26 @@ public class EntityBuilderGenerator : ISourceGenerator
     {
         var config = new EntityBuilderConfig(context);
 
-        IdProvidersGenerator.AddSource(context, config);
+        AddIdProvidersSource(context, config);
 
-        var entities = EntityParser.GetEntities(context);
-
-        foreach (var entity in entities)
+        foreach (var entity in EntityParser.GetEntities(context))
         {
-            AddBuilderSourceFor(entity, context, config);
+            AddEntityBuilderSourceFor(entity, context, config);
         }
     }
 
-    private static void AddBuilderSourceFor(Entity entity,
+    private static void AddIdProvidersSource(GeneratorExecutionContext context, EntityBuilderConfig config)
+    {
+        var sourceText = SourceText.From(IdProvidersTemplate.GenerateSource(config), Encoding.UTF8);
+        
+        context.AddSource("IdProviders.g.cs", sourceText);
+    }
+
+    private static void AddEntityBuilderSourceFor(Entity entity,
         GeneratorExecutionContext context,
         EntityBuilderConfig config)
     {
-        var sourceText = SourceText.From(EntityBuilderTemplate.CreateFrom(entity, config), Encoding.UTF8);
+        var sourceText = SourceText.From(EntityBuilderTemplate.GenerateSource(entity, config), Encoding.UTF8);
 
         context.AddSource($"{entity.Name}.g.cs", sourceText);
     }
