@@ -19,7 +19,7 @@ public class EntityBuilderGenerator : ISourceGenerator
 
         IdProvidersGenerator.AddSource(context, config);
 
-        var entities = GetEntities(context);
+        var entities = EntityParser.GetEntities(context);
 
         foreach (var entity in entities)
         {
@@ -66,26 +66,5 @@ namespace {config.RootNamespace}
 ", Encoding.UTF8);
 
         context.AddSource($"{entity.Name}.g.cs", sourceText);
-    }
-
-    private static IEnumerable<Entity> GetEntities(GeneratorExecutionContext context)
-    {
-        var entities = new List<Entity>();
-        foreach (var syntaxTree in context.Compilation.SyntaxTrees)
-        foreach (var classDeclarationSyntax in syntaxTree
-                     .GetRoot()
-                     .DescendantNodes()
-                     .OfType<ClassDeclarationSyntax>()
-                     .Where(x => x.AttributeLists.Any())
-                     .ToImmutableList())
-        foreach (var attribute in classDeclarationSyntax.AttributeLists.SelectMany(x => x.Attributes))
-        {
-            if (attribute.Name.ToString() == "GenerateEntityBuilder")
-            {
-                entities.Add(new Entity(classDeclarationSyntax));
-            }
-        }
-
-        return entities;
     }
 }
