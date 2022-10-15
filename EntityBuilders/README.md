@@ -16,10 +16,11 @@
 
 ### TODO
 
-* [ ] Id naming convention for construction
+* [X] Id naming convention for construction
 * [ ] Self-to-one properties
 * [ ] Self-to-many properties
 * [ ] Protected and private setters for properties
+* [X] Configurable namespace
 * [ ] Refactoring to a SyntaxReceiver
 * [ ] Non-integer Ids 
 * [ ] Key annotation
