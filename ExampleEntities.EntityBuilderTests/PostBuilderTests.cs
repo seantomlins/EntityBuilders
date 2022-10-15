@@ -6,16 +6,13 @@ namespace ExampleEntities.EntityBuilderTests;
 public class PostBuilderTests
 {
     [Fact]
-    public void Build_Should_ReturnBuiltPost()
+    public void Constructor_Should_CreateEntityWithId()
     {
-        // Given
+        // When
         var builder = new PostBuilder(new SequentialProvider());
 
-        // When
-        var post = builder.Build();
-
         // Then
-        Assert.Equal(1, post.Id);
+        Assert.Equal(1, builder.Entity.Id);
     }
 
     [Fact]
@@ -30,7 +27,7 @@ public class PostBuilderTests
         builder.Blog(blog);
 
         // Then
-        var post = builder.Build();
+        var post = builder.Entity;
         Assert.Equal(blog, post.Blog);
         Assert.Equal(blog.BlogId, post.BlogId);
     }

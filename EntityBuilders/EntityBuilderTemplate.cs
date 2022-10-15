@@ -20,15 +20,16 @@ namespace {config.RootNamespace}
     {{
         private readonly {entity.Name} _entity;
 
+        public {entity.Name} Entity {{ get
+            {{
+                return _entity;
+            }}
+        }}
+
         public {entity.Name}Builder(IIdProvider idProvider)
         {{
             _entity = new {entity.Name}();
             this.{entity.IdPropertyName}(idProvider.NewId());
-        }}
-
-        public {entity.Name} Build()
-        {{
-            return _entity;
         }}
 
         #region Property Methods
