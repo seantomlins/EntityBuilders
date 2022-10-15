@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityBuilders.Annotation",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleEntities", "ExampleEntities\ExampleEntities.csproj", "{AE3A09D2-5BA9-493E-8A32-F0C01BD9D5BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleEntities.EntityBuilderTests", "ExampleEntities.EntityBuilderTests\ExampleEntities.EntityBuilderTests.csproj", "{4F6CF0DD-7727-4F95-AA8C-D9664B3A99FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{AE3A09D2-5BA9-493E-8A32-F0C01BD9D5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE3A09D2-5BA9-493E-8A32-F0C01BD9D5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE3A09D2-5BA9-493E-8A32-F0C01BD9D5BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F6CF0DD-7727-4F95-AA8C-D9664B3A99FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F6CF0DD-7727-4F95-AA8C-D9664B3A99FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F6CF0DD-7727-4F95-AA8C-D9664B3A99FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F6CF0DD-7727-4F95-AA8C-D9664B3A99FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
