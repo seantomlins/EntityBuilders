@@ -84,7 +84,7 @@ namespace {config.RootNamespace}
         return $@"
         public {entity.Name}Builder {property.NavigationProperty.Name}({property.NavigationProperty.PropertyType} value){{
             _entity.{property.NavigationProperty.Name} = value;
-            _entity.{property.ForeignKeyProperty.Name} = value.{property.ForeignKeyProperty.Name};
+            _entity.{property.ForeignKeyProperty.Name} = value?.{property.ForeignKeyProperty.Name} ?? 0;
             return this;
         }}
 ";
