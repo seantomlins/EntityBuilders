@@ -90,15 +90,3 @@ namespace {config.RootNamespace}
 ";
     }
 }
-
-internal class NavigationAndForeignKeyProperty
-{
-    public Property ForeignKeyProperty;
-    public Property NavigationProperty;
-
-    public NavigationAndForeignKeyProperty(Property foreignKeyProperty, Property navigationProperty)
-    {
-        ForeignKeyProperty = foreignKeyProperty;
-        NavigationProperty = navigationProperty;
-    }
-}
