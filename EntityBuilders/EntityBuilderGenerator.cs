@@ -40,6 +40,6 @@ public class EntityBuilderGenerator : ISourceGenerator
     {
         var sourceText = SourceText.From(EntityBuilderTemplate.GenerateSource(entity, config), Encoding.UTF8);
 
-        context.AddSource($"{entity.Name}.g.cs", sourceText);
+        context.AddSource($"{entity.Name}Builder.g.cs", sourceText);
     }
 }
