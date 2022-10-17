@@ -19,6 +19,6 @@ internal class Entity
 
         Properties = classDeclarationSyntax.Members
             .OfType<PropertyDeclarationSyntax>()
-            .Select(x => new Property(x, this));
+            .Select(x => new Property(x));
     }
 }

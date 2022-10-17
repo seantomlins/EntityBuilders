@@ -6,11 +6,9 @@ internal class Property
 {
     public string Name { get; }
     public string PropertyType { get; }
-    public Entity Entity { get; }
 
-    public Property(PropertyDeclarationSyntax propertyDeclarationSyntax, Entity entity)
+    public Property(PropertyDeclarationSyntax propertyDeclarationSyntax)
     {
-        Entity = entity;
         Name = propertyDeclarationSyntax.Identifier.ToString();
         PropertyType = propertyDeclarationSyntax.Type.ToString();
     }
