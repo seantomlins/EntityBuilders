@@ -29,3 +29,4 @@
 * [ ] Non-integer Ids
 * [ ] Key annotation
 * [ ] Respecting EntityTypeConfiguration
+* [ ] Independent Associations (Navigation property without Foreign Key)

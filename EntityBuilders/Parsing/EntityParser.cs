@@ -9,7 +9,8 @@ internal static class EntityParser
 {
     public static IEnumerable<Entity> GetEntities(GeneratorExecutionContext context)
     {
-        var entities = new List<Entity>();
+        var entities = new List<EntityClass>();
+        
         foreach (var syntaxTree in context.Compilation.SyntaxTrees)
         foreach (var classDeclarationSyntax in syntaxTree
                      .GetRoot()
@@ -22,10 +23,10 @@ internal static class EntityParser
                 .SelectMany(x => x.Attributes)
                 .Any(x => x.Name.ToString() == "GenerateEntityBuilder"))
             {
-                entities.Add(new Entity(classDeclarationSyntax));
+                entities.Add(new EntityClass(classDeclarationSyntax));
             }
         }
 
-        return entities;
+        return entities.Select(x => new Entity(x, entities));
     }
 }

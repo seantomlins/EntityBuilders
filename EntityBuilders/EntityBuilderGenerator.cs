@@ -34,12 +34,12 @@ public class EntityBuilderGenerator : ISourceGenerator
         context.AddSource("IdProviders.g.cs", sourceText);
     }
 
-    private static void AddEntityBuilderSourceFor(Entity entity,
+    private static void AddEntityBuilderSourceFor(Entity entityClass,
         GeneratorExecutionContext context,
         EntityBuilderConfig config)
     {
-        var sourceText = SourceText.From(EntityBuilderTemplate.GenerateSource(entity, config), Encoding.UTF8);
+        var sourceText = SourceText.From(EntityBuilderTemplate.GenerateSource(entityClass, config), Encoding.UTF8);
 
-        context.AddSource($"{entity.Name}Builder.g.cs", sourceText);
+        context.AddSource($"{entityClass.Name}Builder.g.cs", sourceText);
     }
 }

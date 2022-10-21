@@ -4,12 +4,12 @@ namespace EntityBuilders.Templates;
 
 internal class NavigationAndForeignKeyProperty
 {
-    public Property ForeignKeyProperty { get; }
     public Property NavigationProperty { get; }
+    public Property? ForeignKeyProperty { get; }
 
-    public NavigationAndForeignKeyProperty(Property foreignKeyProperty, Property navigationProperty)
+    public NavigationAndForeignKeyProperty(Property navigationProperty, Property foreignKeyProperty)
     {
-        ForeignKeyProperty = foreignKeyProperty;
         NavigationProperty = navigationProperty;
+        ForeignKeyProperty = foreignKeyProperty;
     }
 }

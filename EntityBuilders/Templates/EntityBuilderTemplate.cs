@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Text;
+﻿using System.Text;
 using EntityBuilders.Config;
 using EntityBuilders.Models;
 
@@ -9,33 +8,13 @@ internal static class EntityBuilderTemplate
 {
     public static string GenerateSource(Entity entity, EntityBuilderConfig config)
     {
-        var foreignKeyProperties = entity.Properties
-            .Where(x => !x.Name.Equals("Id")
-                        && x.Name.EndsWith("Id")
-                        && entity.Properties.Any(y =>
-                            !y.Name.Equals(x.Name)
-                            && y.Name.StartsWith(x.Name.Substring(0, x.Name.Length - 2))))
-            .ToImmutableList();
-
-        var navigationProperties = new List<NavigationAndForeignKeyProperty>();
-
-        foreach (var foreignKeyProperty in foreignKeyProperties)
-        {
-            navigationProperties.Add(new NavigationAndForeignKeyProperty(foreignKeyProperty,
-                entity.Properties.First(x => !x.Name.EndsWith("Id") &&
-                                             x.Name.StartsWith(foreignKeyProperty.Name.Substring(0,
-                                                 foreignKeyProperty.Name.Length - 2)))));
-        }
-
         var propertyMethods = new StringBuilder();
-        foreach (var simpleProperty in entity.Properties.Where(x =>
-                     !navigationProperties.Select(y => y.ForeignKeyProperty.Name).Contains(x.Name) &&
-                     !navigationProperties.Select(y => y.NavigationProperty.Name).Contains(x.Name)))
+        foreach (var simpleProperty in entity.Properties)
         {
             propertyMethods.Append(SimplePropertyTemplate(entity, simpleProperty));
         }
 
-        foreach (var navigationAndForeignKeyProperty in navigationProperties)
+        foreach (var navigationAndForeignKeyProperty in entity.SelfToOneProperties)
         {
             propertyMethods.Append(NavigationAndForeignKeyPropertyTemplate(entity, navigationAndForeignKeyProperty));
         }
@@ -49,10 +28,9 @@ namespace {config.RootNamespace}
     {{
         private readonly {entity.Name} _entity;
 
-        public {entity.Name} Entity {{ get
-            {{
-                return _entity;
-            }}
+        public {entity.Name} Entity 
+        {{ 
+            get {{ return _entity; }} 
         }}
 
         public {entity.Name}Builder(IIdProvider idProvider)
@@ -81,10 +59,14 @@ namespace {config.RootNamespace}
 
     private static string NavigationAndForeignKeyPropertyTemplate(Entity entity, NavigationAndForeignKeyProperty property)
     {
+        var foreignKey = property.ForeignKeyProperty == null
+            ? Environment.NewLine
+            : @$"_entity.{property.ForeignKeyProperty.Name} = value?.{property.ForeignKeyProperty.Name} ?? 0;";
+
         return $@"
         public {entity.Name}Builder {property.NavigationProperty.Name}({property.NavigationProperty.PropertyType} value){{
             _entity.{property.NavigationProperty.Name} = value;
-            _entity.{property.ForeignKeyProperty.Name} = value?.{property.ForeignKeyProperty.Name} ?? 0;
+            {foreignKey}
             return this;
         }}
 ";
