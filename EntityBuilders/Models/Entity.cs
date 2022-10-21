@@ -30,7 +30,8 @@ internal class Entity
         Properties = properties.Except(foreignKeyProperties).Except(navigationProperties);
 
         SelfToOneProperties = navigationProperties.Select(x =>
-            new NavigationAndForeignKeyProperty(x, foreignKeyProperties.FirstOrDefault(y => y.Name.StartsWith(x.Name.Substring(0, x.Name.Length - 2))))
+            new NavigationAndForeignKeyProperty(x,
+                foreignKeyProperties.FirstOrDefault(y => y.Name.StartsWith(x.Name.Substring(0, x.Name.Length - 2))))
         );
     }
 }
