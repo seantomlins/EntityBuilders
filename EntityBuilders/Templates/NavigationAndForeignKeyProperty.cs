@@ -7,7 +7,7 @@ internal class NavigationAndForeignKeyProperty
     public Property NavigationProperty { get; }
     public Property? ForeignKeyProperty { get; }
 
-    public NavigationAndForeignKeyProperty(Property navigationProperty, Property foreignKeyProperty)
+    public NavigationAndForeignKeyProperty(Property navigationProperty, Property? foreignKeyProperty)
     {
         NavigationProperty = navigationProperty;
         ForeignKeyProperty = foreignKeyProperty;
