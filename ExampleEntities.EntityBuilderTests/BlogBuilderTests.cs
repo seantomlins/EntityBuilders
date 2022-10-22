@@ -31,6 +31,18 @@ public class BlogBuilderTests
         Assert.Equal(blog.BlogId, post.BlogId);
         Assert.Contains(post, blog.Posts);
     }
-    
-    // TODO Handle null post add
+
+    [Fact]
+    public void AddPost_SShould_DoThing_When_PassedNull()
+    {
+        // Given
+        var builder = new BlogBuilder(new SequentialProvider());
+
+        // When
+        builder.AddPost(null);
+
+        // Then
+        var blog = builder.Entity;
+        Assert.Empty(blog.Posts);
+    }
 }

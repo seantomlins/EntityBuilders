@@ -66,6 +66,8 @@ namespace {config.RootNamespace}
     {
         return $@"
         public {entity.Name}Builder Add{property.CollectionEntityClass.Name}({property.CollectionEntityClass.Name} entity){{
+            if (entity == null) return this;
+
             entity.{entity.Name} = _entity;
             entity.{entity.Name}Id = _entity.{entity.IdPropertyName};
             
