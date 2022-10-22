@@ -56,27 +56,6 @@ namespace {config.RootNamespace}
 ";
     }
 
-    private static string SelfToManyPropertyInitializeCollectionTemplate(SelfToManyProperty selfToManyProperty)
-    {
-        return $@"
-            _entity.{selfToManyProperty.Property.Name} = _entity.{selfToManyProperty.Property.Name} ?? new HashSet<{selfToManyProperty.CollectionEntityClass.Name}>();";
-    }
-
-    private static string SelfToManyPropertyTemplate(Entity entity, SelfToManyProperty property)
-    {
-        return $@"
-        public {entity.Name}Builder Add{property.CollectionEntityClass.Name}({property.CollectionEntityClass.Name} entity){{
-            if (entity == null) return this;
-
-            entity.{entity.Name} = _entity;
-            entity.{entity.Name}Id = _entity.{entity.IdPropertyName};
-            
-            _entity.{property.Property.Name}.Add(entity);
-            return this;
-        }}
-";
-    }
-
     private static string SimplePropertyTemplate(Entity entity, Property property)
     {
         return $@"
@@ -87,7 +66,7 @@ namespace {config.RootNamespace}
 ";
     }
 
-    private static string SelfToOnePropertyTemplate(Entity entity, NavigationAndForeignKeyProperty property)
+    private static string SelfToOnePropertyTemplate(Entity entity, SelfToOneProperty property)
     {
         var foreignKey = property.ForeignKeyProperty == null
             ? Environment.NewLine
@@ -100,5 +79,26 @@ namespace {config.RootNamespace}
             return this;
         }}
 ";
+    }
+
+    private static string SelfToManyPropertyTemplate(Entity entity, SelfToManyProperty property)
+    {
+        return $@"
+        public {entity.Name}Builder Add{property.CollectionEntityClass.ClassName}({property.CollectionEntityClass.ClassName} entity){{
+            if (entity == null) return this;
+
+            entity.{entity.Name} = _entity;
+            entity.{entity.Name}Id = _entity.{entity.IdPropertyName};
+            
+            _entity.{property.CollectionProperty.Name}.Add(entity);
+            return this;
+        }}
+";
+    }
+
+    private static string SelfToManyPropertyInitializeCollectionTemplate(SelfToManyProperty selfToManyProperty)
+    {
+        return $@"
+            _entity.{selfToManyProperty.CollectionProperty.Name} = _entity.{selfToManyProperty.CollectionProperty.Name} ?? new HashSet<{selfToManyProperty.CollectionEntityClass.ClassName}>();";
     }
 }

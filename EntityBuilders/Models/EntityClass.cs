@@ -5,7 +5,7 @@ namespace EntityBuilders.Models;
 
 internal class EntityClass
 {
-    public string Name { get; }
+    public string ClassName { get; }
     public string IdPropertyName { get; }
     public string Namespace { get; }
 
@@ -13,7 +13,7 @@ internal class EntityClass
 
     public EntityClass(ClassDeclarationSyntax classDeclarationSyntax)
     {
-        Name = classDeclarationSyntax.Identifier.ToString();
+        ClassName = classDeclarationSyntax.Identifier.ToString();
         Namespace = NamespaceParser.GetNamespace(classDeclarationSyntax);
         IdPropertyName = IdPropertyParser.GetIdPropertyName(classDeclarationSyntax);
         ClassDeclaration = classDeclarationSyntax;

@@ -1,5 +1,4 @@
-﻿using EntityBuilders.Templates;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace EntityBuilders.Models;
 
@@ -10,11 +9,11 @@ internal class Entity
     public string Namespace { get; }
 
     public IEnumerable<Property> Properties { get; }
-    public IEnumerable<NavigationAndForeignKeyProperty> SelfToOneProperties { get; }
+    public IEnumerable<SelfToOneProperty> SelfToOneProperties { get; }
 
     public Entity(EntityClass entityClass, IEnumerable<EntityClass> entities)
     {
-        Name = entityClass.Name;
+        Name = entityClass.ClassName;
         IdPropertyName = entityClass.IdPropertyName;
         Namespace = entityClass.Namespace;
 
@@ -25,9 +24,9 @@ internal class Entity
 
         var foreignKeyProperties = properties.Where(x => !x.Name.Equals(IdPropertyName) && x.Name.EndsWith("Id")).ToList();
 
-        var navigationProperties = properties.Where(x => entities.Any(y => y.Name.Equals(x.PropertyType))).ToList();
+        var navigationProperties = properties.Where(x => entities.Any(y => y.ClassName.Equals(x.PropertyType))).ToList();
 
-        var navigationCollectionProperties = properties.Where(x => entities.Any(y => x.PropertyType.Equals($"ICollection<{y.Name}>")));
+        var navigationCollectionProperties = properties.Where(x => entities.Any(y => x.PropertyType.Equals($"ICollection<{y.ClassName}>")));
 
         Properties = properties
             .Except(foreignKeyProperties)
@@ -35,25 +34,13 @@ internal class Entity
             .Except(navigationCollectionProperties);
 
         SelfToOneProperties = navigationProperties.Select(x =>
-            new NavigationAndForeignKeyProperty(x,
+            new SelfToOneProperty(x,
                 foreignKeyProperties.FirstOrDefault(y => y.Name.StartsWith(x.Name.Substring(0, x.Name.Length - 2))))
         );
 
         SelfToManyProperties = navigationCollectionProperties.Select(x =>
-            new SelfToManyProperty(x, entities.FirstOrDefault(y => x.PropertyType.Equals($"ICollection<{y.Name}>"))));
+            new SelfToManyProperty(x, entities.FirstOrDefault(y => x.PropertyType.Equals($"ICollection<{y.ClassName}>"))));
     }
 
     public IEnumerable<SelfToManyProperty> SelfToManyProperties { get; set; }
-}
-
-internal class SelfToManyProperty
-{
-    public Property Property { get; }
-    public EntityClass CollectionEntityClass { get; }
-
-    public SelfToManyProperty(Property property, EntityClass collectionEntityClass)
-    {
-        Property = property;
-        CollectionEntityClass = collectionEntityClass;
-    }
 }
