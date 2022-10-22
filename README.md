@@ -20,7 +20,7 @@
 * [X] Id naming convention for construction
 * [X] Configurable namespace
 * [X] Self-to-one properties
-* [ ] Self-to-many properties
+* [X] Self-to-many properties
 * [ ] Protected and private setters for properties
 
 ### Future
