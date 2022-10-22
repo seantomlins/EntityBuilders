@@ -27,11 +27,33 @@ internal class Entity
 
         var navigationProperties = properties.Where(x => entities.Any(y => y.Name.Equals(x.PropertyType))).ToList();
 
-        Properties = properties.Except(foreignKeyProperties).Except(navigationProperties);
+        var navigationCollectionProperties = properties.Where(x => entities.Any(y => x.PropertyType.Equals($"ICollection<{y.Name}>")));
+
+        Properties = properties
+            .Except(foreignKeyProperties)
+            .Except(navigationProperties)
+            .Except(navigationCollectionProperties);
 
         SelfToOneProperties = navigationProperties.Select(x =>
             new NavigationAndForeignKeyProperty(x,
                 foreignKeyProperties.FirstOrDefault(y => y.Name.StartsWith(x.Name.Substring(0, x.Name.Length - 2))))
         );
+
+        SelfToManyProperties = navigationCollectionProperties.Select(x =>
+            new SelfToManyProperty(x, entities.FirstOrDefault(y => x.PropertyType.Equals($"ICollection<{y.Name}>"))));
+    }
+
+    public IEnumerable<SelfToManyProperty> SelfToManyProperties { get; set; }
+}
+
+internal class SelfToManyProperty
+{
+    public Property Property { get; }
+    public EntityClass CollectionEntityClass { get; }
+
+    public SelfToManyProperty(Property property, EntityClass collectionEntityClass)
+    {
+        Property = property;
+        CollectionEntityClass = collectionEntityClass;
     }
 }

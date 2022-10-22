@@ -31,4 +31,6 @@ public class BlogBuilderTests
         Assert.Equal(blog.BlogId, post.BlogId);
         Assert.Contains(post, blog.Posts);
     }
+    
+    // TODO Handle null post add
 }
