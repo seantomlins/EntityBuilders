@@ -34,6 +34,7 @@ namespace {config.RootNamespace}
 {{
     public partial class {entity.Name}Builder
     {{
+        private readonly IIdProvider _idProvider;
         private readonly {entity.Name} _entity;
 
         public {entity.Name} Entity 
@@ -43,6 +44,7 @@ namespace {config.RootNamespace}
 
         public {entity.Name}Builder(IIdProvider idProvider)
         {{
+            _idProvider = idProvider;
             _entity = new {entity.Name}();
             this.{entity.IdPropertyName}(idProvider.NewId());
             {initializeCollections}
@@ -91,6 +93,18 @@ namespace {config.RootNamespace}
             entity.{entity.Name}Id = _entity.{entity.IdPropertyName};
             
             _entity.{property.CollectionProperty.Name}.Add(entity);
+            return this;
+        }}
+
+        public {entity.Name}Builder Add{property.CollectionEntityClass.ClassName}(Action<{property.CollectionEntityClass.ClassName}Builder> action){{
+            var builder = new {property.CollectionEntityClass.ClassName}Builder( _idProvider );
+            
+            action.Invoke( builder );
+
+            var entity = builder.{entity.Name}(_entity).Entity;
+
+            _entity.{property.CollectionProperty.Name}.Add(entity);
+
             return this;
         }}
 ";

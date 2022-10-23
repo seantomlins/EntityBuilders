@@ -21,6 +21,7 @@
 * [X] Configurable namespace
 * [X] Self-to-one properties
 * [X] Self-to-many properties
+* [X] AddEntity passing builder for Entity
 * [ ] Protected and private setters for properties
 
 ### Future

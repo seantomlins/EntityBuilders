@@ -1,3 +1,4 @@
+using System.Linq;
 using EntityBuilders;
 using Xunit;
 
@@ -33,16 +34,34 @@ public class BlogBuilderTests
     }
 
     [Fact]
-    public void AddPost_SShould_DoThing_When_PassedNull()
+    public void AddPost_Should_DoNothing_When_PassedNull()
     {
         // Given
         var builder = new BlogBuilder(new SequentialProvider());
 
         // When
-        builder.AddPost(null);
+        builder.AddPost((Post)null!);
 
         // Then
         var blog = builder.Entity;
         Assert.Empty(blog.Posts);
+    }
+
+    [Fact]
+    public void AddPost_Should_AcceptPostBuilderExpression()
+    {
+        // Given
+        var builder = new BlogBuilder(new SequentialProvider());
+
+        // When
+        builder.AddPost(p => p.Title("Post Title"));
+
+        // Then
+        var blog = builder.Entity;
+        var post = blog.Posts.First();
+        Assert.Equal(blog, post.Blog);
+        Assert.Equal(blog.BlogId, post.BlogId);
+        Assert.Equal(2, post.Id);
+        Assert.Equal("Post Title", post.Title);
     }
 }
