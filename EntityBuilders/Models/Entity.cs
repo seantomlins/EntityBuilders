@@ -10,6 +10,7 @@ internal class Entity
 
     public IEnumerable<Property> Properties { get; }
     public IEnumerable<SelfToOneProperty> SelfToOneProperties { get; }
+    public IEnumerable<SelfToManyProperty> SelfToManyProperties { get; }
 
     public Entity(EntityClass entityClass, IEnumerable<EntityClass> entities)
     {
@@ -22,11 +23,17 @@ internal class Entity
             .Select(x => new Property(x))
             .ToList();
 
-        var foreignKeyProperties = properties.Where(x => !x.Name.Equals(IdPropertyName) && x.Name.EndsWith("Id")).ToList();
+        var foreignKeyProperties = properties
+            .Where(x => !x.Name.Equals(IdPropertyName) && x.Name.EndsWith("Id"))
+            .ToList();
 
-        var navigationProperties = properties.Where(x => entities.Any(y => y.ClassName.Equals(x.PropertyType))).ToList();
+        var navigationProperties = properties
+            .Where(x => entities.Any(y => y.ClassName.Equals(x.PropertyType)))
+            .ToList();
 
-        var navigationCollectionProperties = properties.Where(x => entities.Any(y => x.PropertyType.Equals($"ICollection<{y.ClassName}>")));
+        var navigationCollectionProperties = properties
+            .Where(x => entities.Any(y => x.PropertyType.Equals($"ICollection<{y.ClassName}>")))
+            .ToList();
 
         Properties = properties
             .Except(foreignKeyProperties)
@@ -39,8 +46,6 @@ internal class Entity
         );
 
         SelfToManyProperties = navigationCollectionProperties.Select(x =>
-            new SelfToManyProperty(x, entities.FirstOrDefault(y => x.PropertyType.Equals($"ICollection<{y.ClassName}>"))));
+            new SelfToManyProperty(x, entities.First(y => x.PropertyType.Equals($"ICollection<{y.ClassName}>"))));
     }
-
-    public IEnumerable<SelfToManyProperty> SelfToManyProperties { get; set; }
 }
