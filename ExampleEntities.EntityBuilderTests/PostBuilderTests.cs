@@ -16,7 +16,7 @@ public class PostBuilderTests
     }
 
     [Fact]
-    public void Blog_Should_SetBlogAndBlogId()
+    public void Blog_Should_SetBlogAndBlogId_And_AddPostToBlogPosts()
     {
         // Given
         var blog = new Blog { BlogId = 123 };
@@ -30,6 +30,7 @@ public class PostBuilderTests
         var post = builder.Entity;
         Assert.Equal(blog, post.Blog);
         Assert.Equal(blog.BlogId, post.BlogId);
+        Assert.Contains(post, blog.Posts);
     }
 
     [Fact]
