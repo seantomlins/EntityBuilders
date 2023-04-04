@@ -23,6 +23,8 @@
 * [X] Self-to-many properties
 * [X] AddEntity passing builder for Entity
 * [ ] Protected and private setters for properties
+* [ ] Create as a nuget package
+* [ ] Publish nuget package
 
 ### Future
 
