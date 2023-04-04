@@ -4,7 +4,7 @@
 * Use the versions of the source generator packages in the official docs
 * Debugging can be done by attaching to VBCSCompiler.dll
 * I haven't figured out how to use IncrementalSourceGenerator
-* Id or <EntityName>Id is the Primary Key convention
+* Id or {EntityName}Id is the Primary Key convention
 * Writing tests against example generated code is better than testing the generator itself
 
 ### Guides and Tutorials
