@@ -1,4 +1,6 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace EntityBuilders.Models;
 
@@ -20,6 +22,7 @@ internal class Entity
 
         var properties = entityClass.ClassDeclaration.Members
             .OfType<PropertyDeclarationSyntax>()
+            .Where(SetterIsPublic)
             .Select(x => new Property(x))
             .ToList();
 
@@ -47,5 +50,21 @@ internal class Entity
 
         SelfToManyProperties = navigationCollectionProperties.Select(x =>
             new SelfToManyProperty(x, entities.First(y => x.PropertyType.Equals($"ICollection<{y.ClassName}>"))));
+    }
+
+    private static bool SetterIsPublic(BasePropertyDeclarationSyntax propertyDeclarationSyntax)
+    {
+        var setter = propertyDeclarationSyntax
+            .AccessorList?
+            .Accessors
+            .FirstOrDefault(a => a.IsKind(SyntaxKind.SetAccessorDeclaration));
+
+        if (setter == null)
+        {
+            return false;
+        }
+
+        return setter.Modifiers.All(x =>
+            !x.IsKind(SyntaxKind.PrivateKeyword) && !x.IsKind(SyntaxKind.ProtectedKeyword) && !x.IsKind(SyntaxKind.InternalKeyword));
     }
 }

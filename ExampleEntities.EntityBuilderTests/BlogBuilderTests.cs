@@ -65,4 +65,14 @@ public class BlogBuilderTests
         Assert.Equal(2, post.Id);
         Assert.Equal("Post Title", post.Title);
     }
+
+    [Fact]
+    public void Should_NotHaveCreatedDateUtcMethod_Because_ItDoesNotHaveAPublicSetter()
+    {
+        // Given
+        var builderType = typeof(BlogBuilder);
+
+        // Then
+        Assert.Null(builderType.GetProperty("CreatedDateUtc"));
+    }
 }
