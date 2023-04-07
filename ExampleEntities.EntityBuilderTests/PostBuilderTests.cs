@@ -10,7 +10,7 @@ public class PostBuilderTests
     public void Constructor_Should_CreateEntityWithId()
     {
         // When
-        var builder = new PostBuilder(new SequentialProvider());
+        var builder = new PostBuilder(new SequentialIdProvider());
 
         // Then
         Assert.Equal(1, builder.Entity.Id);
@@ -22,7 +22,7 @@ public class PostBuilderTests
         // Given
         var blog = new Blog { BlogId = 123 };
 
-        var builder = new PostBuilder(new SequentialProvider());
+        var builder = new PostBuilder(new SequentialIdProvider());
 
         // When
         builder.Blog(blog);
@@ -39,7 +39,7 @@ public class PostBuilderTests
         // Given
         var blog = new Blog { BlogId = 123 };
 
-        var builder = new PostBuilder(new SequentialProvider());
+        var builder = new PostBuilder(new SequentialIdProvider());
         builder.Blog(blog);
 
         // When

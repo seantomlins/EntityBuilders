@@ -14,7 +14,7 @@ namespace {config.RootNamespace}
         int NewId();
     }}
 
-    public class SequentialProvider : IIdProvider
+    public class SequentialIdProvider : IIdProvider
     {{
         private int Count;
 

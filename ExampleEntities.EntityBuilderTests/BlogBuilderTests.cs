@@ -11,7 +11,7 @@ public class BlogBuilderTests
     public void Constructor_Should_CreateEntityWithId()
     {
         // When
-        var builder = new BlogBuilder(new SequentialProvider());
+        var builder = new BlogBuilder(new SequentialIdProvider());
 
         // Then
         Assert.Equal(1, builder.Entity.BlogId);
@@ -21,7 +21,7 @@ public class BlogBuilderTests
     public void Build_Should_ReturnTheEntity()
     {
         // When
-        var builder = new BlogBuilder(new SequentialProvider());
+        var builder = new BlogBuilder(new SequentialIdProvider());
 
         // Then
         Assert.Same(builder.Entity, builder.Build());
@@ -32,7 +32,7 @@ public class BlogBuilderTests
     {
         // Given
         var post = new Post();
-        var builder = new BlogBuilder(new SequentialProvider());
+        var builder = new BlogBuilder(new SequentialIdProvider());
 
         // When
         builder.AddPost(post);
@@ -48,7 +48,7 @@ public class BlogBuilderTests
     public void AddPost_Should_DoNothing_When_PassedNull()
     {
         // Given
-        var builder = new BlogBuilder(new SequentialProvider());
+        var builder = new BlogBuilder(new SequentialIdProvider());
 
         // When
         builder.AddPost((Post)null!);
@@ -62,7 +62,7 @@ public class BlogBuilderTests
     public void AddPost_Should_AcceptPostBuilderExpression()
     {
         // Given
-        var builder = new BlogBuilder(new SequentialProvider());
+        var builder = new BlogBuilder(new SequentialIdProvider());
 
         // When
         builder.AddPost(p => p.Title("Post Title"));
