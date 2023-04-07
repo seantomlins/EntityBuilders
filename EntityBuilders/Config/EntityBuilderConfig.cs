@@ -10,9 +10,9 @@ internal class EntityBuilderConfig
     
     public EntityBuilderConfig(GeneratorExecutionContext context)
     {
-        context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("entity_builders.root_namespace",
+        context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("entity_builders.generated_code_namespace",
             out var rootNamespace);
-        context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("entity_builders.entities_namespace",
+        context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("entity_builders.source_entities_namespace",
             out var entitiesNamespace);
         RootNamespace = rootNamespace ?? "EntityBuilders";
         EntitiesNamespace = entitiesNamespace ?? "";
