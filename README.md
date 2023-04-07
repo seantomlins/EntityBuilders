@@ -22,7 +22,8 @@
 * [X] Self-to-one properties
 * [X] Self-to-many properties
 * [X] AddEntity passing builder for Entity
-* [ ] Protected and private setters for properties
+* [X] Protected and private setters for properties
+* [ ] Should setting a parent of a child also add the child to the parents children collection?
 * [ ] Include/Exclude paths for entities. Is there a standard for syntax?
 * [ ] Create as a nuget package
 * [ ] Publish nuget package

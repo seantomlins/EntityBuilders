@@ -31,7 +31,6 @@ public class PostBuilderTests
         var post = builder.Entity;
         Assert.Equal(blog, post.Blog);
         Assert.Equal(blog.BlogId, post.BlogId);
-        Assert.Contains(post, blog.Posts);
     }
 
     [Fact]
