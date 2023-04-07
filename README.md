@@ -9,9 +9,9 @@
 
 ### Guides and Tutorials
 
-[Official Docs](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview)
+[Source Code Generator Official Docs](https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview)
 
-[Cookbook](https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md)
+[Source Code Generator Cookbook](https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md)
 
 [EF Conventions](https://www.entityframeworktutorial.net/efcore/conventions-in-ef-core.aspx)
 
@@ -23,9 +23,9 @@
 * [X] Self-to-many properties
 * [X] AddEntity passing builder for Entity
 * [ ] Protected and private setters for properties
+* [ ] Include/Exclude paths for entities. Is there a standard for syntax?
 * [ ] Create as a nuget package
 * [ ] Publish nuget package
-* [ ] Include/Exclude paths for entities. Is there a standard for syntax?
 
 ### Future
 
@@ -34,3 +34,7 @@
 * [ ] Key annotation
 * [ ] Respecting EntityTypeConfiguration
 * [ ] Independent Associations (Navigation property without Foreign Key)
+
+### Maybe
+
+* [ ] Generate builders in project A for entities contained in project B. Feasible?
