@@ -1,2 +1,3 @@
 ﻿is_global = true
 entity_builders.root_namespace = EntityBuilders
+entity_builders.entities_namespace = ExampleEntities.Entities

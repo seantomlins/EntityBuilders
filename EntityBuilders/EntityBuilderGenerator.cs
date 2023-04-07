@@ -21,7 +21,7 @@ public class EntityBuilderGenerator : ISourceGenerator
 
         AddIdProvidersSource(context, config);
 
-        foreach (var entity in EntityParser.GetEntities(context))
+        foreach (var entity in EntityParser.GetEntities(context, config))
         {
             AddEntityBuilderSourceFor(entity, context, config);
         }

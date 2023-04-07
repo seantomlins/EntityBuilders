@@ -25,6 +25,7 @@
 * [ ] Protected and private setters for properties
 * [ ] Create as a nuget package
 * [ ] Publish nuget package
+* [ ] Include/Exclude paths for entities. Is there a standard for syntax?
 
 ### Future
 

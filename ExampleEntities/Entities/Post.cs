@@ -1,8 +1,5 @@
-﻿using EntityBuilders.Annotation;
+﻿namespace ExampleEntities.Entities;
 
-namespace ExampleEntities;
-
-[GenerateEntityBuilder]
 public class Post
 {
     public int Id { get; set; } // Primary Key convention type A

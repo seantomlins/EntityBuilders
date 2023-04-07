@@ -1,5 +1,6 @@
 using System.Linq;
 using EntityBuilders;
+using ExampleEntities.Entities;
 using Xunit;
 
 namespace ExampleEntities.EntityBuilderTests;
