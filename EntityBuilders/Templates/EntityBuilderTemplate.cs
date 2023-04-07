@@ -50,6 +50,11 @@ namespace {config.RootNamespace}
             {initializeCollections}
         }}
 
+        public {entity.Name} Build() 
+        {{ 
+            return _entity;
+        }}
+
         #region Property Methods
         {propertyMethods}
         #endregion

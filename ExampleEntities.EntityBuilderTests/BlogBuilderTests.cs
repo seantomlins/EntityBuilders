@@ -16,6 +16,16 @@ public class BlogBuilderTests
         // Then
         Assert.Equal(1, builder.Entity.BlogId);
     }
+    
+    [Fact]
+    public void Build_Should_ReturnTheEntity()
+    {
+        // When
+        var builder = new BlogBuilder(new SequentialProvider());
+
+        // Then
+        Assert.Same(builder.Entity, builder.Build());
+    }
 
     [Fact]
     public void AddPost_Should_AddPostToBlog_And_SetBlogOnPost()
